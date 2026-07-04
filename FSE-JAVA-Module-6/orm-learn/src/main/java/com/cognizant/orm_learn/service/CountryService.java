@@ -39,4 +39,13 @@ public class CountryService {
     public List<Country> findByNameContainingIgnoreCase(String name){
         return countryRepository.findByNameContainingIgnoreCase(name);
     }
+    @Transactional
+    public List<Country> findByNameContainingIgnoreCaseOrderByNameAsc(String name){
+        return countryRepository.findByNameContainingIgnoreCaseOrderByNameAsc(name);
+    }
+    @Transactional
+    public List<Country> findByNameStartingWithIgnoreCase(String name){
+        return countryRepository.findByNameStartingWithIgnoreCase(name);
+    }
+
 }

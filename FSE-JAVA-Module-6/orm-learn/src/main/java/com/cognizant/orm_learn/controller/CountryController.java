@@ -36,4 +36,13 @@ public class CountryController {
     public List<Country> findByNameContainingIgnoreCase(@RequestParam String name){
         return countryService.findByNameContainingIgnoreCase(name);
     }
+    @GetMapping("/search/sorted")
+    public List<Country> findByNameContainingIgnoreCaseOrderByNameAsc(@RequestParam String name){
+        return countryService.findByNameContainingIgnoreCaseOrderByNameAsc(name);
+    }
+    @GetMapping("/search/start")
+    public List<Country> findByNameStartingWithIgnoreCase(@RequestParam String name){
+        return countryService.findByNameStartingWithIgnoreCase(name);
+    }
+
 }
