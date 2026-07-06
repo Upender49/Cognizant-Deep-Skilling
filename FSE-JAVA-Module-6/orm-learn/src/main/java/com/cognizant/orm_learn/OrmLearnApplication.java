@@ -1,14 +1,8 @@
 package com.cognizant.orm_learn;
 
-import com.cognizant.orm_learn.model.Country;
-import com.cognizant.orm_learn.model.Department;
-import com.cognizant.orm_learn.model.Employee;
-import com.cognizant.orm_learn.model.Skill;
+import com.cognizant.orm_learn.model.*;
 import com.cognizant.orm_learn.repository.StockRepository;
-import com.cognizant.orm_learn.service.CountryService;
-import com.cognizant.orm_learn.service.DepartmentService;
-import com.cognizant.orm_learn.service.EmployeeService;
-import com.cognizant.orm_learn.service.SkillService;
+import com.cognizant.orm_learn.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +26,7 @@ public class OrmLearnApplication implements CommandLineRunner {
     private static EmployeeService employeeService;
     private static DepartmentService departmentService;
     private static SkillService skillService;
+    private static AttemptService attemptService;
 
     public static void main(String[] args) {
 
@@ -39,32 +34,75 @@ public class OrmLearnApplication implements CommandLineRunner {
         employeeService = applicationContext.getBean(EmployeeService.class);
         departmentService = applicationContext.getBean(DepartmentService.class);
         skillService = applicationContext.getBean(SkillService.class);
+        attemptService = applicationContext.getBean(AttemptService.class);
+
+
+        //testGetAttempt();
         //testGetEmployee();
         //testAddEmployee();
-       // testUpdateEmployee();
-       // testGetDepartment();
+        // testUpdateEmployee();
+        // testGetDepartment();
         //testAddSkillToEmployee();
-        testGetAllPermanentEmployees();
+        //testGetAllPermanentEmployees();
+        //testAverageSalary();
+        getAllEmployeesNative();
     }
-    private static void testGetAllPermanentEmployees(){
+    private static void getAllEmployeesNative(){
+        System.out.println(employeeService.getAllEmployeesNative());
+    }
+    private static void testAverageSalary(){
+        Double avg = employeeService.getAverageSalary(3);
+        System.out.println("Average Salary = " + avg);
+    }
+    private static void testGetAttempt(){
+        Attempt attempt =
+                attemptService.getAttempt(1,1);
+
+        System.out.println(
+                "User : "
+                        +attempt.getUser().getName()
+        );
+        System.out.println(
+                "Date : "
+                        +attempt.getDate()
+        );
+        for(AttemptQuestion aq:
+                attempt.getQuestions()){
+
+            Question q =
+                    aq.getQuestion();
+            System.out.println(q.getText());
+            for(Option o:q.getOptions()){
+                System.out.println(
+                        o.getText()
+                                +" "
+                                +o.getScore()
+                );
+            }
+        }
+    }
+
+    private static void testGetAllPermanentEmployees() {
         List<Employee> employees = employeeService.getAllPermanentEmployees();
         System.out.println(employees);
-        employees.forEach( e -> System.out.println(e.getSkillSet()));
+        employees.forEach(e -> System.out.println(e.getSkillSet()));
     }
-    private static void testAddSkillToEmployee(){
+
+    private static void testAddSkillToEmployee() {
         Employee employee = employeeService.get(2);
         Skill skill = skillService.get(3);
         employee.getSkillSet().add(skill);
         employeeService.save(employee);
         System.out.println(employee);
     }
-    
-    public static void testGetDepartment(){
+
+    public static void testGetDepartment() {
         Department department = departmentService.get(1);
         System.out.println(department);
         Set<Employee> employees = department.getAllEmployees();
         System.out.println(employees);
     }
+
     public static void testGetEmployee() {
 
         Employee employee = employeeService.get(1);
@@ -72,6 +110,7 @@ public class OrmLearnApplication implements CommandLineRunner {
         System.out.println(employee.getDepartment());
         System.out.println(employee.getSkillSet());
     }
+
     private static void testAddEmployee() {
 
         Employee employee = new Employee();
@@ -102,7 +141,8 @@ public class OrmLearnApplication implements CommandLineRunner {
         System.out.println(employee);
 
     }
-    private static void testUpdateEmployee(){
+
+    private static void testUpdateEmployee() {
 
 
         Employee employee =

@@ -24,6 +24,13 @@ public class EmployeeService {
     public List<Employee> getAllPermanentEmployees(){
         return employeeRepository.getAllPermanentEmployees();
     }
+    @Transactional
+    public Double getAverageSalary(int id){
+        return employeeRepository.getEmployeeAvgSal(id);
+    }
 
-
+    @Transactional
+    public List<Employee> getAllEmployeesNative(){
+        return employeeRepository.getAllEmployeesNative();
+    }
 }
