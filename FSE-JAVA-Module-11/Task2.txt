@@ -1,0 +1,59 @@
+umesh@upender MINGW64 ~/GitDemo (main)
+$ touch error.log
+
+umesh@upender MINGW64 ~/GitDemo (main)
+$ mkdir log
+
+umesh@upender MINGW64 ~/GitDemo (main)
+$ touch log/sample.txt
+
+umesh@upender MINGW64 ~/GitDemo (main)
+$ touch .gitignore
+
+umesh@upender MINGW64 ~/GitDemo (main)
+$ notepad++ .gitignore
+
+umesh@upender MINGW64 ~/GitDemo (main)
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        .gitignore
+        error.log
+        log/
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+umesh@upender MINGW64 ~/GitDemo (main)
+$ ^C
+
+umesh@upender MINGW64 ~/GitDemo (main)
+$ notepad++ .gitignore
+
+umesh@upender MINGW64 ~/GitDemo (main)
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        .gitignore
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+umesh@upender MINGW64 ~/GitDemo (main)
+$ git add .
+
+umesh@upender MINGW64 ~/GitDemo (main)
+$ git commit -m "Add .gitignore file "
+[main 952d93c] Add .gitignore file
+ 1 file changed, 2 insertions(+)
+ create mode 100644 .gitignore
+
+umesh@upender MINGW64 ~/GitDemo (main)
+$ ^C
+
+umesh@upender MINGW64 ~/GitDemo (main)
+$
